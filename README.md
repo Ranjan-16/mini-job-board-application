@@ -1,75 +1,154 @@
-# React + TypeScript + Vite
+# Mini Job Board Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A simple **Mini Job Board** built using **React + TypeScript + Vite**.
+The application supports two roles:
 
-Currently, two official plugins are available:
+* **Admin**
+* **Candidate**
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Admins can create jobs and view applicants, while candidates can browse and apply for jobs.
 
-## React Compiler
+---
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+## 🚀 Tech Stack
 
-Note: This will impact Vite dev & build performances.
+* React + TypeScript
+* Vite
+* MUI (Material UI)
+* TanStack Query
+* Redux Toolkit
+* React Hook Form
+* JSON Server (Mock API)
+* Axios
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 📌 Features
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### 🔐 Authentication
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+* Single login/register screen
+* Admin login with predefined credentials
+* Candidate registration (name, email, password)
+* Role-based routing
+* Protected routes
+* Login persistence using localStorage
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### 👨‍💼 Admin Panel (`/admin`)
+
+* Create Job with validation
+* Job List with:
+
+  * Title
+  * Days Remaining
+  * Number of Applicants
+* View Applicants in Modal
+* Loading & Error handling
+* Snackbar feedback
+
+### 👩‍💻 Candidate Panel (`/jobs`)
+
+* View all active jobs (`daysRemaining > 0`)
+* Apply to jobs
+* Prevent multiple applications
+* Disable Apply button when:
+
+  * Already applied
+  * Job expired
+
+---
+
+## 🗂️ Project Structure
+
+```
+src/
+ ├─ api/
+ ├─ components/
+ ├─ hooks/
+ ├─ pages/
+ ├─ redux/
+ ├─ routes/
+ └─ App.tsx
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## ⚙️ Setup Instructions
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### 1️⃣ Install Dependencies
+
+```bash
+npm install
 ```
+
+---
+
+### 2️⃣ Start Mock API (JSON Server)
+
+```bash
+npm run server
+```
+
+Runs on:
+
+```
+http://localhost:3001
+```
+
+---
+
+### 3️⃣ Start Frontend
+
+```bash
+npm run dev
+```
+
+Runs on:
+
+```
+http://localhost:5173
+```
+
+---
+
+## 🔑 Admin Credentials
+
+```
+Email: admin@test.com
+Password: admin123
+```
+
+---
+
+## 📊 Mock API (db.json)
+
+```
+users
+jobs
+applications
+```
+
+---
+
+## 🎨 UI Expectations Implemented
+
+* Clean MUI layout
+* Loading states
+* Error handling
+* Disabled buttons
+* Snackbar feedback
+
+---
+
+## 📝 Notes
+
+* Applications are stored using JSON Server.
+* TanStack Query handles data fetching & caching.
+* Redux stores authentication state.
+
+---
+
+## 💼 Author
+
+Mini Job Board Assignment
+Frontend Technical Implementation
