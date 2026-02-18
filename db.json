@@ -1,0 +1,80 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "email": "admin@test.com",
+      "password": "admin123",
+      "role": "admin"
+    },
+    {
+      "id": "3d70",
+      "name": "Ashish",
+      "email": "ashish@gmail.com",
+      "password": "ashish",
+      "role": "candidate"
+    },
+    {
+      "id": "62f7",
+      "name": "test",
+      "email": "test@test.com",
+      "password": "test",
+      "role": "candidate"
+    }
+  ],
+  "jobs": [
+    {
+      "id": "23cb",
+      "title": "",
+      "description": "",
+      "daysRemaining": 0
+    },
+    {
+      "id": "352a",
+      "title": "Software Developer",
+      "description": "develop",
+      "daysRemaining": 4
+    },
+    {
+      "id": "586c",
+      "title": "ui",
+      "description": "ui",
+      "daysRemaining": 4
+    },
+    {
+      "id": "5687",
+      "title": "Developer",
+      "description": "dev",
+      "daysRemaining": 1
+    }
+  ],
+  "applications": [
+    {
+      "id": "3f0b",
+      "jobId": "352a",
+      "name": "ashish@gmail.com",
+      "email": "ashish@gmail.com",
+      "appliedDate": "2026-02-18T12:33:15.747Z"
+    },
+    {
+      "id": "c32a",
+      "jobId": "586c",
+      "name": "Ashish",
+      "email": "ashish@gmail.com",
+      "appliedDate": "2026-02-18T13:20:09.296Z"
+    },
+    {
+      "id": "ffef",
+      "jobId": "5687",
+      "name": "Ashish",
+      "email": "ashish@gmail.com",
+      "appliedDate": "2026-02-18T13:26:18.918Z"
+    },
+    {
+      "id": "a6ba",
+      "jobId": "586c",
+      "name": "test",
+      "email": "test@test.com",
+      "appliedDate": "2026-02-18T13:27:09.018Z"
+    }
+  ]
+}
