@@ -43,7 +43,7 @@ export default function Login() {
     reset
   } = useForm<FormValues>();
 
-  // ✅ Login
+  // Login
   const onLogin = async (data: FormValues) => {
     try {
       const res = await api.get(
@@ -57,7 +57,7 @@ export default function Login() {
         return;
       }
 
-      // ✅ Save to localStorage
+      // Save to localStorage
       localStorage.setItem("user", JSON.stringify(user));
 
       dispatch(setUser(user));
@@ -69,7 +69,6 @@ export default function Login() {
     }
   };
 
-  // ✅ Register Candidate
   const onRegister = async (data: FormValues) => {
     try {
       await api.post("/users", {

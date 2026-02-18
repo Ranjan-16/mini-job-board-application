@@ -8,8 +8,6 @@ import {
   Chip,
   Box,
   Grid,
-  Divider,
-  LinearProgress,
   CircularProgress,
 } from "@mui/material";
 import { useJobs } from "../hooks/useJobs";
@@ -42,7 +40,7 @@ export default function Jobs() {
     navigate("/");
   };
 
-  // ✅ Get applications
+  // Get applications
   const {
     data: applications = []
   } = useQuery({
@@ -53,7 +51,7 @@ export default function Jobs() {
     }
   });
 
-  // ✅ Loading State
+  // Loading State
   if(isLoading){
     return (
       <Container sx={{ py:6, textAlign:"center" }}>
@@ -62,7 +60,7 @@ export default function Jobs() {
     );
   }
 
-  // ✅ Error State
+  // Error State
   if(isError){
     return (
       <Container sx={{ py:6 }}>
