@@ -54,7 +54,7 @@ export default function JobForm(){
           {...register("daysRemaining",{
             required:"No of days is required",
             valueAsNumber:true,
-            validate:(v)=>v>0 || "Must be greater than 0"
+            // validate:(v)=>v>0 || "Must be greater than 0"
           })}
           error={!!errors.daysRemaining}
         helperText={errors.daysRemaining?.message as string}

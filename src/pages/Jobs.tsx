@@ -5,7 +5,6 @@ import {
   Button,
   Stack,
   Container,
-  Chip,
   Box,
   Grid,
   CircularProgress,
@@ -15,8 +14,6 @@ import { useApply } from "../hooks/useApply";
 import { useQuery } from "@tanstack/react-query";
 import { api } from "../api/api";
 import { useSelector, useDispatch } from "react-redux";
-import CheckCircleIcon from "@mui/icons-material/CheckCircle";
-import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { useNavigate } from "react-router-dom";
 import { logout } from "../redux/store";
@@ -71,7 +68,6 @@ export default function Jobs() {
     );
   }
 
-  const jobsActive = jobs.filter((job:any)=>job.daysRemaining > 0);
 
   return (
     <Container maxWidth="md" sx={{ py: 4 }}>
@@ -96,25 +92,12 @@ export default function Jobs() {
       </Box>
 
       <Stack spacing={3}>
-        {jobsActive.map((job:any)=>{
+        {jobs.map((job:any)=>{
 
           const alreadyApplied = applications.some(
             (a:any)=> a.jobId === job.id && a.email === user?.email
           );
 
-          const urgencyColor =
-            job.daysRemaining <= 3
-              ? "error"
-              : job.daysRemaining <= 7
-              ? "warning"
-              : "success";
-
-          const urgencyLabel =
-            job.daysRemaining === 1
-              ? "Last day!"
-              : job.daysRemaining <= 3
-              ? "Closing soon"
-              : "Active";
 
           return (
             <Card
@@ -131,7 +114,7 @@ export default function Jobs() {
               />
 
               <CardContent>
-                <Grid container spacing={2} alignItems="flex-start">
+                <Grid container spacing={2} alignItems="flex-start" justifyContent={"space-between"}>
 
                   <Grid item xs={12} sm={9}>
                     <Typography variant="h5" fontWeight={600} mb={1}>
@@ -146,34 +129,14 @@ export default function Jobs() {
                       {job.description}
                     </Typography>
 
-                    <Box sx={{ display:"flex", gap:1, flexWrap:"wrap" }}>
-                      <Chip
-                        icon={<AccessTimeIcon />}
-                        label={`${job.daysRemaining} day${job.daysRemaining !== 1 ? "s" : ""} left`}
-                        color={urgencyColor}
-                        variant="outlined"
-                        size="small"
-                      />
-
-                      <Chip
-                        label={urgencyLabel}
-                        color={urgencyColor}
-                        size="small"
-                      />
-
-                      {alreadyApplied && (
-                        <Chip
-                          icon={<CheckCircleIcon />}
-                          label="Applied"
-                          color="success"
-                          size="small"
-                        />
-                      )}
-                    </Box>
+                  
                   </Grid>
 
                   <Grid item xs={12} sm={3} sx={{ display:"flex", justifyContent:"flex-end" }}>
-                    <Button
+                    {job.daysRemaining === 0 ? 
+                      <Typography color="error" fontWeight={600}>
+                        Expired
+                        </Typography> :<Button
                       variant={alreadyApplied ? "outlined" : "contained"}
                       color={alreadyApplied ? "success" : "primary"}
                       size="large"
@@ -191,8 +154,9 @@ export default function Jobs() {
                       })}
                       sx={{ minWidth:120 }}
                     >
-                      {alreadyApplied ? "Applied ✓" : "Apply Now"}
-                    </Button>
+                      {alreadyApplied ? "Applied" : "Apply Now"}
+                    </Button>}
+                    
                   </Grid>
 
                 </Grid>
@@ -202,7 +166,7 @@ export default function Jobs() {
         })}
       </Stack>
 
-      {jobsActive.length === 0 && (
+      {jobs.length === 0 && (
         <Box sx={{ textAlign:"center", py:6 }}>
           <Typography variant="h6" color="text.secondary">
             No active jobs available at the moment
