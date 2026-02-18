@@ -23,6 +23,7 @@ export default function JobList() {
 
     if (isLoading) return <Typography>Loading jobs...</Typography>;
     if (isError) return <Typography color="error">Error loading jobs</Typography>;
+    if(jobs.length === 0) return <Typography>No jobs available</Typography>;
 
 
     return (

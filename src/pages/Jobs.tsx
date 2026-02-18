@@ -198,18 +198,6 @@ export default function Jobs() {
                   </Grid>
 
                 </Grid>
-
-                {job.daysRemaining <= 3 && (
-                  <>
-                    <Divider sx={{ my:2 }} />
-                    <LinearProgress
-                      variant="determinate"
-                      value={(job.daysRemaining / 30) * 100}
-                      color={urgencyColor}
-                      sx={{ height:4, borderRadius:2 }}
-                    />
-                  </>
-                )}
               </CardContent>
             </Card>
           );
