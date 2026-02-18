@@ -1,28 +1,50 @@
-import { Container, Typography, Stack, Box, Paper } from "@mui/material";
+import { Container, Typography, Stack, Box, Paper, Button } from "@mui/material";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
+import LogoutIcon from "@mui/icons-material/Logout";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { logout } from "../redux/store";
 import JobForm from "../components/JobForm";
 import JobList from "../components/JobList";
 
 export default function Admin(){
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    dispatch(logout());
+    navigate("/");
+  };
+
   return(
     <Container maxWidth="md" sx={{ py: 4 }}>
-      <Box sx={{ mb: 4 }}>
-        <Typography
-          variant="h4"
-          component="h1"
-          sx={{
-            fontWeight: 700,
-            display: "flex",
-            alignItems: "center",
-            gap: 1,
-            mb: 1
-          }}
+      <Box sx={{ mb: 4, display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
+        <Box>
+          <Typography
+            variant="h4"
+            component="h1"
+            sx={{
+              fontWeight: 700,
+              display: "flex",
+              alignItems: "center",
+              gap: 1,
+              mb: 1
+            }}
+          >
+            <AdminPanelSettingsIcon /> Admin Panel
+          </Typography>
+          <Typography variant="body1" color="textSecondary">
+            Manage job postings and view applications
+          </Typography>
+        </Box>
+        <Button
+          variant="outlined"
+          color="error"
+          startIcon={<LogoutIcon />}
+          onClick={handleLogout}
         >
-          <AdminPanelSettingsIcon /> Admin Panel
-        </Typography>
-        <Typography variant="body1" color="textSecondary">
-          Manage job postings and view applications
-        </Typography>
+          Logout
+        </Button>
       </Box>
 
       <Stack spacing={4}>

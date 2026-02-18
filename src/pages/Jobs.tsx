@@ -16,9 +16,12 @@ import { useJobs } from "../hooks/useJobs";
 import { useApply } from "../hooks/useApply";
 import { useQuery } from "@tanstack/react-query";
 import { api } from "../api/api";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
+import LogoutIcon from "@mui/icons-material/Logout";
+import { useNavigate } from "react-router-dom";
+import { logout } from "../redux/store";
 
 export default function Jobs() {
 
@@ -29,8 +32,15 @@ export default function Jobs() {
   } = useJobs();
 
   const { mutate, isPending } = useApply();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const user = useSelector((s:any)=>s.auth.user);
+
+  const handleLogout = () => {
+    dispatch(logout());
+    navigate("/");
+  };
 
   // ✅ Get applications
   const {
@@ -67,14 +77,24 @@ export default function Jobs() {
 
   return (
     <Container maxWidth="md" sx={{ py: 4 }}>
-      <Box sx={{ mb: 4 }}>
-        <Typography variant="h4" fontWeight={700}>
-          Available Jobs
-        </Typography>
+      <Box sx={{ mb: 4, display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
+        <Box>
+          <Typography variant="h4" fontWeight={700}>
+            Available Jobs
+          </Typography>
 
-        <Typography variant="body1" color="text.secondary">
-          Find and apply to exciting job opportunities
-        </Typography>
+          <Typography variant="body1" color="text.secondary">
+            Find and apply to exciting job opportunities
+          </Typography>
+        </Box>
+        <Button
+          variant="outlined"
+          color="error"
+          startIcon={<LogoutIcon />}
+          onClick={handleLogout}
+        >
+          Logout
+        </Button>
       </Box>
 
       <Stack spacing={3}>
