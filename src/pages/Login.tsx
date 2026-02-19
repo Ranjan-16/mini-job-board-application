@@ -8,14 +8,10 @@ import {
   Card,
   CardContent,
   Divider,
-  InputAdornment,
   Alert
 } from "@mui/material";
 import LoginIcon from "@mui/icons-material/Login";
 import AppRegistrationIcon from "@mui/icons-material/AppRegistration";
-import EmailIcon from "@mui/icons-material/Email";
-import LockIcon from "@mui/icons-material/Lock";
-import PersonIcon from "@mui/icons-material/Person";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { api } from "../api/api";
@@ -33,14 +29,13 @@ export default function Login() {
   const dispatch = useDispatch();
   const nav = useNavigate();
 
-  const [isRegister, setIsRegister] = useState(false);
-  const [errorMsg, setErrorMsg] = useState("");
+  const [isRegister, setIsRegister] = useState<boolean>(false);
+  const [errorMsg, setErrorMsg] = useState<string>("");
 
   const {
     register,
     handleSubmit,
-    formState: { errors },
-    reset
+    formState: { errors }
   } = useForm<FormValues>();
 
   // Login
@@ -56,8 +51,6 @@ export default function Login() {
         setErrorMsg("Invalid credentials");
         return;
       }
-
-      // Save to localStorage
       localStorage.setItem("user", JSON.stringify(user));
 
       dispatch(setUser(user));
@@ -71,17 +64,17 @@ export default function Login() {
 
   const onRegister = async (data: FormValues) => {
     try {
-      await api.post("/users", {
+      const res = await api.post("/users", {
         name: data.name,
         email: data.email,
         password: data.password,
         role: "candidate"
       });
 
-      setErrorMsg("");
-      alert("Candidate Registered");
-      setIsRegister(false);
-      reset();
+      const user = res.data;
+      localStorage.setItem("user", JSON.stringify(user));
+      dispatch(setUser(user));
+      nav("/jobs");
     } catch {
       setErrorMsg("Registration failed");
     }
@@ -140,13 +133,7 @@ export default function Login() {
                 })}
                 error={!!errors.name}
                 helperText={errors.name?.message as string}
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <PersonIcon sx={{ color: "action.active" }} />
-                    </InputAdornment>
-                  )
-                }}
+                
               />
             )}
 
@@ -164,13 +151,7 @@ export default function Login() {
               })}
               error={!!errors.email}
               helperText={errors.email?.message as string}
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <EmailIcon sx={{ color: "action.active" }} />
-                  </InputAdornment>
-                )
-              }}
+              
             />
 
             {/* Password */}
@@ -183,13 +164,7 @@ export default function Login() {
               })}
               error={!!errors.password}
               helperText={errors.password?.message as string}
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <LockIcon sx={{ color: "action.active" }} />
-                  </InputAdornment>
-                )
-              }}
+             
             />
 
             {/* Submit */}
@@ -219,14 +194,6 @@ export default function Login() {
           </Button>
         </CardContent>
       </Card>
-
-      <Typography
-        variant="caption"
-        color="text.secondary"
-        sx={{ textAlign: "center", display: "block", mt: 3 }}
-      >
-        💼 Mini Job Board © 2026
-      </Typography>
     </Container>
   );
 }
